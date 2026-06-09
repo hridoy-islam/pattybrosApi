@@ -84,7 +84,7 @@ const createOrderIntoDB = async (payload: TOrder) => {
     result = await result.populate("items.menuId");
 
     try {
-      const adminEmail = "mahitasnimul2@gmail.com";
+      const adminEmail = "info@patty-bros.co.uk";
 
       await Promise.all([
         sendEmail(
@@ -147,7 +147,7 @@ const updateOrderIntoDB = async (id: string, payload: Partial<TOrder>) => {
   // (order.status !== 'cancelled' ensures we don't spam emails if it was already cancelled)
   if (payload.status === "cancelled" && order.status !== "cancelled") {
     try {
-      const adminEmail = "mahitasnimul2@gmail.com";
+      const adminEmail = "info@patty-bros.co.uk";
 
       await Promise.all([
         // Send email to customer using the template we created

@@ -39,7 +39,7 @@ const createReservationIntoDB = async (payload: TReservation) => {
 
     // 2. Dispatch notifications to Customer and Admin safely
     try {
-      const adminEmail = "mahitasnimul2@gmail.com";
+      const adminEmail = "info@patty-bros.co.uk";
 
       await Promise.all([
         // Send Thank You / Status Alert to customer (No mention of a table layout)
