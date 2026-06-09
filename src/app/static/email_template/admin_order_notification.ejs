@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
+    <title></title>
+    <style type="text/css" rel="stylesheet" media="all">
+        /* Base ------------------------------ */
+
+        @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700&display=swap");
+
+        body {
+            width: 100% !important;
+            height: 100%;
+            margin: 0;
+            -webkit-text-size-adjust: none;
+        }
+
+        td {
+            word-break: break-word;
+        }
+
+        .preheader {
+            display: none !important;
+            visibility: hidden;
+            mso-hide: all;
+            font-size: 1px;
+            line-height: 1px;
+            max-height: 0;
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        body,
+        td,
+        th {
+            font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #dc2626;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        td,
+        th {
+            font-size: 16px;
+        }
+
+        p,
+        ul,
+        ol {
+            margin: 0.4em 0 1.1875em;
+            font-size: 16px;
+            line-height: 1.625;
+            color: #51545e;
+        }
+
+        /* Data table ------------------------------ */
+
+        .purchase {
+            width: 100%;
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        .purchase_content {
+            width: 100%;
+            margin: 0;
+            padding: 15px 0 0 0;
+        }
+
+        .purchase_item {
+            padding: 12px 0;
+            color: #111111;
+            font-size: 16px;
+            line-height: 20px;
+            border-bottom: 1px dashed #eaeaec;
+        }
+
+        .purchase_heading {
+            padding-bottom: 8px;
+            border-bottom: 2px solid #111111;
+        }
+
+        .purchase_heading p {
+            margin: 0;
+            color: #111111;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .purchase_footer {
+            padding-top: 15px;
+        }
+
+        .purchase_total {
+            margin: 0;
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+            color: #dc2626;
+        }
+
+        body {
+            background-color: #f2f4f6;
+        }
+
+        .email-wrapper {
+            width: 100%;
+            background-color: #f2f4f6;
+        }
+
+        .email-body_inner {
+            width: 570px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-top: 8px solid #dc2626; /* Operational red ticket marker strip */
+        }
+
+        .content-cell {
+            padding: 45px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .email-body_inner {
+                width: 100% !important;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body,
+            .email-wrapper,
+            .email-body_inner {
+                background-color: #222222 !important;
+                color: #ffffff !important;
+            }
+
+            p,
+            ul,
+            ol,
+            h1,
+            span,
+            .purchase_item,
+            .purchase_heading p {
+                color: #ffffff !important;
+            }
+            
+            .purchase_item {
+                border-bottom: 1px dashed #444444 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <span class="preheader">🚨 New Ticket: Action required for Order #<%= order.refId %>.</span>
+    <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+        <tr>
+            <td align="center">
+                <table class="email-content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                    <tr>
+                        <td class="email-body" width="570" cellpadding="0" cellspacing="0">
+                            <table class="email-body_inner" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
+                                <tr>
+                                    <td class="content-cell">
+                                        <div class="f-fallback">
+                                            
+                                            <h1>🚨 New Kitchen Ticket</h1>
+                                            <p><%= title %></p>
+
+                                            <!-- Priority Pickup Box -->
+                                            <div style="background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin-bottom: 25px;">
+                                                <p style="margin: 0 0 5px 0; font-size: 14px; color: #856404; font-weight: bold;">PREPARE FOR PICKUP TIME:</p>
+                                                <h2 style="margin: 0; font-size: 26px; color: #856404; font-weight: bold;"><%= order.pickUpTime %></h2>
+                                                <p style="margin: 10px 0 0 0; font-size: 13px; color: #555;"><strong>Order Ticket:</strong> #<%= order.refId %></p>
+                                            </div>
+
+                                            <!-- Customer Metadata Details -->
+                                            <h3>Customer Profile:</h3>
+                                            <p style="font-size: 14px; margin-top: -5px; line-height: 1.5;">
+                                                <strong>Name:</strong> <%= name %><br>
+                                                <strong>Phone:</strong> <a href="tel:<%= order.customerPhone %>" style="color: #3869d4;"><%= order.customerPhone %></a><br>
+                                                <strong>Email:</strong> <%= order.customerEmail %>
+                                            </p>
+
+                                            <!-- Production Checklist Breakdown -->
+                                            <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td>
+                                                        <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="purchase_heading align-left" width="15%"><p>Item</p></th>
+                                                                    <th class="purchase_heading" align="left"><p>Kitchen Items</p></th>
+                                                                    <th class="purchase_heading" align="center" width="12%"><p>Qty</p></th>
+                                                                    <th class="purchase_heading align-right" width="18%"><p>Price</p></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% order.items.forEach(function(item) { %>
+                                                                    <% 
+                                                                        // Calculate the combined price (Menu Item Base Price + Add-ons Total)
+                                                                        var basePrice = Number(item.menuId.price || 0);
+                                                                        var addonsTotal = 0;
+                                                                        if (item.addOnItems && item.addOnItems.length > 0) {
+                                                                            item.addOnItems.forEach(function(addon) {
+                                                                                addonsTotal += Number(addon.price || 0);
+                                                                            });
+                                                                        }
+                                                                        var combinedSinglePrice = basePrice + addonsTotal;
+                                                                        var lineTotal = combinedSinglePrice * Number(item.quantity || 1);
+                                                                    %>
+                                                                    <tr>
+                                                                        <!-- Image Column -->
+                                                                       <!-- Image Column -->
+<td class="purchase_item align-left" style="vertical-align: top; padding-right: 10px; width: 60px;">
+    <table cellpadding="0" cellspacing="0" role="presentation">
+        <tr>
+            <td style="padding: 0;">
+                <img 
+                    src="<%= (item.menuId && item.menuId.image) ? item.menuId.image : 'https://placehold.co/50x50' %>" 
+                    alt="<%= item.menuId && (item.menuId.name || item.menuId.title) ? (item.menuId.name || item.menuId.title) : 'Food Item' %>"
+                    width="50" 
+                    height="50" 
+                    style="
+                        display: block; 
+                        border-radius: 6px; 
+                        width: 50px; 
+                        height: 50px; 
+                        min-width: 50px;
+                        border: 0;
+                        -ms-interpolation-mode: bicubic;
+                    " 
+                />
+            </td>
+        </tr>
+    </table>
+</td>
+
+                                                                        <!-- Description & Modifiers Column -->
+                                                                        <td class="purchase_item" align="left" style="vertical-align: top; padding-right: 10px;">
+                                                                            <span style="font-weight: bold; font-size: 16px;">
+                                                                                <%= item.menuId.name || item.menuId.title || 'Menu Item' %>
+                                                                            </span>
+                                                                            
+                                                                            <!-- Add-ons Listing -->
+                                                                            <% if (item.addOnItems && item.addOnItems.length > 0) { %>
+                                                                                <div style="font-size: 14px; margin-top: 4px; padding-left: 10px; border-left: 2px solid #dc2626;">
+                                                                                    <strong style="color: #dc2626; font-size: 11px;">+ MODIFIERS / ADD-ONS:</strong>
+                                                                                    <ul style="margin: 2px 0; padding-left: 15px; font-weight: bold; color: #111111;">
+                                                                                        <% item.addOnItems.forEach(function(addon) { %>
+                                                                                            <li><%= addon.title %> <span style="font-weight: normal; color: #71747e;">(+£<%= addon.price %>)</span></li>
+                                                                                        <% }); %>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            <% } %>
+
+                                                                            <!-- Specific Preparation Notes -->
+                                                                            <% if (item.instructions) { %>
+                                                                                <div style="font-size: 14px; background-color: #f8d7da; color: #721c24; padding: 6px 10px; margin-top: 6px; font-weight: bold; border-radius: 3px;">
+                                                                                    ⚠️ NOTE: "<%= item.instructions %>"
+                                                                                </div>
+                                                                            <% } %>
+                                                                        </td>
+
+                                                                        <!-- Quantity Column -->
+                                                                        <td class="purchase_item" align="center" style="vertical-align: top; font-size: 20px; font-weight: bold;">
+                                                                            x<%= item.quantity %>
+                                                                        </td>
+
+                                                                        <!-- Calculated Price Column -->
+                                                                        <td class="purchase_item align-right" style="vertical-align: top; font-weight: bold; font-size: 16px;">
+                                                                            £<%= item.price ? item.price : lineTotal.toFixed(2) %>
+                                                                        </td>
+                                                                    </tr>
+                                                                <% }); %>
+
+                                                                <!-- Total Row -->
+                                                                <tr>
+                                                                    <td colspan="3" align="right" style="padding-top: 15px; font-weight: bold;">Total Amount:</td>
+                                                                    <td align="right" style="padding-top: 15px;">
+                                                                        <span class="purchase_total">£<%= order.totalAmount %></span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

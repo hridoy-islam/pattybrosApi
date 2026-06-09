@@ -11,6 +11,14 @@ router.get(
   "/",
 OrderControllers.getAllOrder
 );
+
+router.get(
+  "/top-orders",
+  auth("admin"),
+OrderControllers.getTopOrderedMenuItems
+);
+
+
 router.get(
   "/:id",
 OrderControllers.getSingleOrder
@@ -30,12 +38,6 @@ router.delete(
   auth("admin"),
 OrderControllers.deleteOrder
 );
-router.get(
-  "/top-orders",
-  auth("admin"),
-OrderControllers.getTopOrderedMenuItems
-);
-
 
 
 export const OrderRoutes = router;

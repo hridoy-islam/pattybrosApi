@@ -43,6 +43,7 @@ export interface TUser {
   isDeleted: boolean;
   authorized: boolean;
 
+  website?: string;
   image?: string;
   phone?: string;
   googleUid?: string;

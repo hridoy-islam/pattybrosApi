@@ -47,6 +47,9 @@ const MenuSchema = new Schema<TMenu>(
     image:{
       type: String,
     },
+    cookingTime:{
+      type: String,
+    },
     status:{
       type: String,
       enum:["active","inactive"],

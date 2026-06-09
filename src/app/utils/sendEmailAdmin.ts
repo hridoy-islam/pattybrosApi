@@ -3,44 +3,34 @@ import ejs from "ejs";
 import config from "../config";
 
 export const sendEmailAdmin = async (
-  to: string,
+   to: string,
   template: string,
   subject: string,
-  name: string,
-  otp?: string,
+  customerName: string,
   title?: string,
-  applicantEmail?: string,
-  phone?: string,
-  countryOfResidence?: string,
-  dob?:string,
-  availableFromDate?:string
+  order?: any
 ) => {
-  const transporter = nodemailer.createTransport({
-    host: "mail.cyberpeers.co.uk",
-    port: 465,
-    secure: true,
-    auth: {
-      user: "noreply@cyberpeers.co.uk",
-      pass: "ROr5e205EhQ(P@,C",
-    },
-  });
+   const transporter = nodemailer.createTransport({
+     host: "smtp.hostinger.com",
+     port: 465,
+     secure: true, 
+     auth: {
+       user: "info@patty-bros.co.uk", 
+       pass: "Admin4London@", 
+     },
+   });
 
   try {
     const html = await ejs.renderFile(
       __dirname + "/../static/email_template/" + template + ".ejs",
       {
-        otp: otp,
-        name: name,
+        name: customerName,
         title: title,
-        phone: phone,
-        email:applicantEmail,
-        countryOfResidence: countryOfResidence,
-        dob: dob,
-        availableFromDate: availableFromDate,
+       order:order
       }
     );
     const mailOptions = {
-      from:'"CyberPeers" <noreply@cyberpeers.co.uk>',
+      from: '"Patty Bro\'s" <info@patty-bros.co.uk>',
       to,
       subject,
       html: html,

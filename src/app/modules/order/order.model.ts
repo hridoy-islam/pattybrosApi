@@ -1,54 +1,75 @@
 import { Schema, model } from "mongoose";
-import { TOrder,TAddOnItem } from "./order.interface";
+import { TOrder, TAddOnItem } from "./order.interface";
 
-
-const addOnSchema = new Schema<TAddOnItem>(
-  {
-    title: { 
-      type: String, 
-    },
-    price: { 
-      type: Number 
-    },
-    
-
+// ─── Add-On Schema ────────────────────────────────────────────────────────────
+const addOnSchema = new Schema<TAddOnItem>({
+  title: { 
+    type: String, 
   },
-);
+  price: { 
+    type: Number 
+  },
+});
 
+// ─── Single Order Item Schema ──────────────────────────────────────────────────
+// This groups menuId, instructions, quantity, and addOns together for each item.
+const orderItemSchema = new Schema({
+  menuId: {
+    type: Schema.Types.ObjectId,
+    ref: "Menu",
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+    min: 1,
+    default: 1,
+  },
+  instructions: {
+    type: String,
+  },
+  addOnItems: { 
+    type: [addOnSchema], 
+    default: [] 
+  },
+});
+
+// ─── Main Order Schema ─────────────────────────────────────────────────────────
 const OrderSchema = new Schema<TOrder>(
   {
-  
-
-    menuId: {
-      type: Schema.Types.ObjectId,
-      ref: "Menu",
+    items: {
+      type: [orderItemSchema],
       required: true,
+     
     },
-    instructions: {
-      type:String,
+    refId: { 
+      type: String 
     },
-    refId:{type:String},
-    addOnItems: { type: [addOnSchema] },
-    totalAmount:{ type: Number ,required:true},
+    totalAmount: { 
+      type: Number, 
+      required: true 
+    },
     status: {
       type: String,
       enum: ["pending", "preparing", "ready", "completed", "cancelled"],
       default: "pending",
     },
-       customerName:{
+    customerName: {
       type: String,
-      required:true
+      required: true,
     },
-
-    customerPhone:{
+    customerPhone: {
       type: String,
-      required:true
+      required: true,
     },
-
-    pickUpTime:{
+    customerEmail: {
       type: String,
-      required:true
-    }
+      required: true,
+    },
+    pickUpTime: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

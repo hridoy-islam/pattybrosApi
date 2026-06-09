@@ -1,0 +1,426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
+    <title></title>
+    <style type="text/css" rel="stylesheet" media="all">
+        /* Base ------------------------------ */
+
+        @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700&display=swap");
+
+        body {
+            width: 100% !important;
+            height: 100%;
+            margin: 0;
+            -webkit-text-size-adjust: none;
+        }
+
+        a {
+            color: #3869d4;
+        }
+
+        a img {
+            border: none;
+        }
+
+        td {
+            word-break: break-word;
+        }
+
+        .preheader {
+            display: none !important;
+            visibility: hidden;
+            mso-hide: all;
+            font-size: 1px;
+            line-height: 1px;
+            max-height: 0;
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        /* Type ------------------------------ */
+
+        body,
+        td,
+        th {
+            font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #333333;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333333;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        h3 {
+            margin-top: 0;
+            color: #333333;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        td,
+        th {
+            font-size: 16px;
+        }
+
+        p,
+        ul,
+        ol,
+        blockquote {
+            margin: 0.4em 0 1.1875em;
+            font-size: 16px;
+            line-height: 1.625;
+        }
+
+        p.sub {
+            font-size: 13px;
+        }
+
+        /* Utilities ------------------------------ */
+
+        .align-right {
+            text-align: right;
+        }
+
+        .align-left {
+            text-align: left;
+        }
+
+        .align-center {
+            text-align: center;
+        }
+
+        .u-margin-bottom-none {
+            margin-bottom: 0;
+        }
+
+        /* Data table ------------------------------ */
+
+        .purchase {
+            width: 100%;
+            margin: 0;
+            padding: 20px 0;
+            -premailer-width: 100%;
+            -premailer-cellpadding: 0;
+            -premailer-cellspacing: 0;
+        }
+
+        .purchase_content {
+            width: 100%;
+            margin: 0;
+            padding: 15px 0 0 0;
+            -premailer-width: 100%;
+            -premailer-cellpadding: 0;
+            -premailer-cellspacing: 0;
+        }
+
+        .purchase_item {
+            padding: 12px 0;
+            color: #51545e;
+            font-size: 15px;
+            line-height: 18px;
+            border-bottom: 1px solid #eaeaec;
+        }
+
+        .purchase_heading {
+            padding-bottom: 8px;
+            border-bottom: 2px solid #dc2626;
+        }
+
+        .purchase_heading p {
+            margin: 0;
+            color: #85878e;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .purchase_footer {
+            padding-top: 15px;
+        }
+
+        .purchase_total {
+            margin: 0;
+            text-align: right;
+            font-weight: bold;
+            font-size: 18px;
+            color: #333333;
+        }
+
+        .purchase_total--label {
+            padding: 15px 15px 0 0;
+        }
+
+        body {
+            background-color: #f2f4f6;
+            color: #51545e;
+        }
+
+        p {
+            color: #51545e;
+        }
+
+        .email-wrapper {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            -premailer-width: 100%;
+            -premailer-cellpadding: 0;
+            -premailer-cellspacing: 0;
+            background-color: #f2f4f6;
+        }
+
+        .email-content {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            -premailer-width: 100%;
+            -premailer-cellpadding: 0;
+            -premailer-cellspacing: 0;
+        }
+
+        /* Body ------------------------------ */
+
+        .email-body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            -premailer-width: 100%;
+            -premailer-cellpadding: 0;
+            -premailer-cellspacing: 0;
+        }
+
+        .email-body_inner {
+            width: 570px;
+            margin: 0 auto;
+            padding: 0;
+            -premailer-width: 570px;
+            -premailer-cellpadding: 0;
+            -premailer-cellspacing: 0;
+            background-color: #ffffff;
+            border-top: 6px solid #dc2626;
+        }
+
+        .content-cell {
+            padding: 45px;
+        }
+
+        /*Media Queries ------------------------------ */
+
+        @media only screen and (max-width: 600px) {
+            .email-body_inner {
+                width: 100% !important;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body,
+            .email-body,
+            .email-body_inner,
+            .email-content,
+            .email-wrapper {
+                background-color: #222222 !important;
+                color: #fff !important;
+            }
+
+            p,
+            ul,
+            ol,
+            blockquote,
+            h1,
+            h2,
+            h3,
+            span,
+            .purchase_item,
+            .purchase_total,
+            .purchase_heading p {
+                color: #fff !important;
+            }
+
+            .purchase_item {
+                border-bottom: 1px solid #444444 !important;
+            }
+        }
+
+        :root {
+            color-scheme: light dark;
+            supported-color-schemes: light dark;
+        }
+    </style>
+</head>
+
+<body>
+    <span class="preheader">Your Patty Bro's order has been cancelled.</span>
+    <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+        <tr>
+            <td align="center">
+                <table class="email-content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+
+                    <tr>
+                        <td class="email-body" width="570" cellpadding="0" cellspacing="0">
+                            <table class="email-body_inner" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
+                                <tr>
+                                    <td class="content-cell">
+                                        <div class="f-fallback">
+                                            <div style="text-align: center; margin-bottom: 20px;">
+                                                <h2 style="color: #dc2626; margin: 0; font-size: 28px; letter-spacing: 1px;">PATTY BRO'S</h2>
+                                            </div>
+
+                                            <h1>Hello, <%= name %>!</h1>
+                                            <p><%= title || 'Your order has been cancelled.' %></p>
+
+                                            <div style="background-color: #f4f4f7; padding: 15px; border-radius: 4px; margin-bottom: 25px;">
+                                                <p style="margin: 0 0 5px 0; font-size: 14px; color: #51545e;"><strong>Order Reference:</strong> #<%= order.refId %></p>
+                                                <% if (order.cancellationReason) { %>
+                                                    <p style="margin: 5px 0 0 0; font-size: 14px; color: #dc2626;"><strong>Reason for Cancellation:</strong> <%= order.cancellationReason %></p>
+                                                <% } %>
+                                            </div>
+
+                                            <table class="purchase" width="100%" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td>
+                                                        <table class="purchase_content" width="100%" cellpadding="0" cellspacing="0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="purchase_heading align-left" width="15%"><p>Item</p></th>
+                                                                    <th class="purchase_heading align-left"><p>Description</p></th>
+                                                                    <th class="purchase_heading align-center" width="12%"><p>Qty</p></th>
+                                                                    <th class="purchase_heading align-right" width="18%"><p>Price</p></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% order.items.forEach(function(item) { %>
+                                                                    <% 
+                                                                        var basePrice = Number(item.menuId.price || 0);
+                                                                        var addonsTotal = 0;
+                                                                        if (item.addOnItems && item.addOnItems.length > 0) {
+                                                                            item.addOnItems.forEach(function(addon) {
+                                                                                addonsTotal += Number(addon.price || 0);
+                                                                            });
+                                                                        }
+                                                                        var combinedSinglePrice = basePrice + addonsTotal;
+                                                                        var lineTotal = combinedSinglePrice * Number(item.quantity || 1);
+                                                                    %>
+                                                                    <tr>
+                                                                        <!-- Image Column -->
+                                                                        <td class="purchase_item align-left" style="vertical-align: top; padding-right: 10px; width: 60px;">
+                                                                            <table cellpadding="0" cellspacing="0" role="presentation">
+                                                                                <tr>
+                                                                                    <td style="padding: 0;">
+                                                                                        <img 
+                                                                                            src="<%= (item.menuId && item.menuId.image) ? item.menuId.image : 'https://placehold.co/50x50' %>" 
+                                                                                            alt="<%= item.menuId && (item.menuId.name || item.menuId.title) ? (item.menuId.name || item.menuId.title) : 'Food Item' %>"
+                                                                                            width="50" 
+                                                                                            height="50" 
+                                                                                            style="
+                                                                                                display: block; 
+                                                                                                border-radius: 6px; 
+                                                                                                width: 50px; 
+                                                                                                height: 50px; 
+                                                                                                min-width: 50px;
+                                                                                                border: 0;
+                                                                                                -ms-interpolation-mode: bicubic;
+                                                                                            " 
+                                                                                        />
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                        
+                                                                        <!-- Description + Addons Column -->
+                                                                        <td class="purchase_item align-left" style="vertical-align: top; padding-right: 10px;">
+                                                                            <span style="font-weight: bold; color: #333333; font-size: 16px;">
+                                                                                <%= item.menuId.name || item.menuId.title || 'Menu Item' %>
+                                                                            </span>
+                                                                            
+                                                                            <% if (item.addOnItems && item.addOnItems.length > 0) { %>
+                                                                                <div style="font-size: 13px; color: #71747e; margin-top: 6px; padding-left: 10px; border-left: 2px solid #dc2626;">
+                                                                                    <strong style="font-size: 11px; text-transform: uppercase; color: #dc2626;">Add-ons:</strong>
+                                                                                    <ul style="margin: 2px 0; padding-left: 15px; list-style-type: square;">
+                                                                                        <% item.addOnItems.forEach(function(addon) { %>
+                                                                                            <li><%= addon.title %> <span style="font-weight: bold; color: #333333;">(+£<%= addon.price %>)</span></li>
+                                                                                        <% }); %>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            <% } %>
+
+                                                                            <% if (item.instructions) { %>
+                                                                                <div style="font-size: 13px; color: #dc2626; font-style: italic; margin-top: 6px; padding-left: 10px;">
+                                                                                    <strong>Note:</strong> "<%= item.instructions %>"
+                                                                                </div>
+                                                                            <% } %>
+                                                                        </td>
+                                                                        
+                                                                        <!-- Quantity Column -->
+                                                                        <td class="purchase_item align-center" style="vertical-align: top; font-weight: bold; color: #333333; font-size: 16px;">
+                                                                            <%= item.quantity %>
+                                                                        </td>
+
+                                                                        <!-- Combined Price Column -->
+                                                                        <td class="purchase_item align-right" style="vertical-align: top; font-weight: bold; color: #333333; font-size: 16px;">
+                                                                            £<%= item.price ? item.price : lineTotal.toFixed(2) %>
+                                                                        </td>
+                                                                    </tr>
+                                                                <% }); %>
+
+                                                                <!-- Total Row -->
+                                                                <tr>
+                                                                    <td colspan="3" class="purchase_total--label align-right" style="font-weight: bold; font-size: 16px; padding-top: 20px;">Total Amount:</td>
+                                                                    <td class="align-right" style="padding-top: 20px;">
+                                                                        <span class="purchase_total" style="color: #dc2626; font-size: 20px;">£<%= order.totalAmount %></span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                           
+
+                                            <p>If you have any questions or believe this cancellation was made in error, please feel free to reach out to our team.</p>
+                                            
+                                            <p>Apologies for the inconvenience,<br />Patty Bro's</p>
+
+                                            <div style="margin-top: 30px; font-size: 13px; color: #71747e; line-height: 1.6; text-align: left; border-top: 1px solid #eaeaec; padding-top: 20px;">
+                                                <strong>Patty Bro's</strong><br>
+                                                info@patty-bros.co.uk<br>
+                                                (+44) 07495258565<br>
+                                                Market Place Peckham, Unit 10
+                                                <br>The Aylesham Shopping Centre, Rye Ln
+                                                <br>Peckham, London SE15 5EW
+                                            </div>
+                                           
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

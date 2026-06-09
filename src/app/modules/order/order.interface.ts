@@ -6,23 +6,26 @@ export interface TAddOnItem {
   price: number;
 }
 
+export interface TOrderItem {
+  menuId: Types.ObjectId;
+  quantity: number;
+  instructions?: string;
+  addOnItems?: TAddOnItem[];
+}
+
 export interface TOrder {
   _id: Types.ObjectId;
+  
+  // Replaced individual menu fields with an array of ordered items
+  items: TOrderItem[];
 
-  menuId: Types.ObjectId;
-
-  instructions?: string;
   refId?: string;
-
-  addOnItems?: TAddOnItem[];
-
   totalAmount: number;
-
   status: "pending" | "preparing" | "ready" | "completed" | "cancelled";
 
   customerName: string;
-
   customerPhone: string;
+  customerEmail: string;
 
   pickUpTime: string;
 }

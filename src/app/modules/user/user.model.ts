@@ -124,6 +124,7 @@ const userSchema = new Schema<TUser, UserModel>(
     zipCode: { type: String },
     state: { type: String },
     address: { type: String },
+    website: { type: String },
    
   },
   {

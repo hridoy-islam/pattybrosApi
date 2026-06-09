@@ -7,16 +7,16 @@ export const sendEmail = async (
   template: string,
   subject: string,
   name: string,
-  otp?: string,
-  title?: string
+  title?: string,
+  order?: any // Added order parameter to capture full details
 ) => {
   const transporter = nodemailer.createTransport({
-    host: "mail.cyberpeers.co.uk",
+    host: "smtp.hostinger.com",
     port: 465,
-    secure: true,
+    secure: true, 
     auth: {
-      user: "noreply@cyberpeers.co.uk",
-      pass: "ROr5e205EhQ(P@,C",
+      user: "info@patty-bros.co.uk", 
+      pass: "Admin4London@", 
     },
   });
 
@@ -24,13 +24,14 @@ export const sendEmail = async (
     const html = await ejs.renderFile(
       __dirname + "/../static/email_template/" + template + ".ejs",
       {
-        otp: otp,
         name: name,
         title: title,
+        order: order, // Passed directly to EJS variables
       }
     );
+    
     const mailOptions = {
-      from:'"CyberPeers" <noreply@cyberpeers.co.uk>',
+      from: '"Patty Bro\'s" <info@patty-bros.co.uk>',
       to,
       subject,
       html: html,

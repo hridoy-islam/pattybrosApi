@@ -22,12 +22,13 @@ const UploadDocumentToGCS = async (file: any, payload: any) => {
   try {
     if (!file) throw new AppError(httpStatus.BAD_REQUEST, "No file provided");
 
-    const fileName = `${Date.now()}-${file.originalname}`;
+    const sanitizedName = file.originalname.replace(/\s+/g, "-");
+    const fileName = `${Date.now()}-${sanitizedName}`;
     const gcsFile = bucket.file(fileName);
 
     await new Promise((resolve, reject) => {
       const stream = gcsFile.createWriteStream({
-        metadata: { contentType: file.mimetype }, // Set metadata to determine file type
+        metadata: { contentType: file.mimetype },
       });
 
       stream.on("error", (err) => {
@@ -37,7 +38,6 @@ const UploadDocumentToGCS = async (file: any, payload: any) => {
 
       stream.on("finish", async () => {
         try {
-          // Make the file publicly accessible
           await gcsFile.makePublic();
           resolve(true);
         } catch (err) {
@@ -46,13 +46,11 @@ const UploadDocumentToGCS = async (file: any, payload: any) => {
         }
       });
 
-      // Send the file buffer to GCS
       stream.end(file.buffer);
     });
 
     const fileUrl = `https://storage.googleapis.com/${bucketName}/${fileName}`;
-    const fileContentText = file.buffer.toString("utf-8");
-    // Check file type and determine where to save the file URL
+
     if (file_type === "userProfile") {
       const user = await User.findById(entityId);
       if (!user) throw new AppError(httpStatus.NOT_FOUND, "User not found");
@@ -61,7 +59,6 @@ const UploadDocumentToGCS = async (file: any, payload: any) => {
       await user.save();
 
       return { entityId, file_type, fileUrl };
-    
     } else {
       return { entityId, file_type, fileUrl };
     }

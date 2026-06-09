@@ -1,0 +1,234 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
+    <title></title>
+    <style type="text/css" rel="stylesheet" media="all">
+        @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,700&display=swap");
+
+        body {
+            width: 100% !important;
+            height: 100%;
+            margin: 0;
+            -webkit-text-size-adjust: none;
+        }
+
+        a {
+            color: #3869d4;
+        }
+
+        a img {
+            border: none;
+        }
+
+        td {
+            word-break: break-word;
+        }
+
+        .preheader {
+            display: none !important;
+            visibility: hidden;
+            mso-hide: all;
+            font-size: 1px;
+            line-height: 1px;
+            max-height: 0;
+            max-width: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        body, td, th {
+            font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #333333;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333333;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        p, ul, ol {
+            margin: 0.4em 0 1.1875em;
+            font-size: 16px;
+            line-height: 1.625;
+        }
+
+        body {
+            background-color: #f2f4f6;
+            color: #51545e;
+        }
+
+        .email-wrapper {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f4f6;
+        }
+
+        .email-content {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .email-body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .email-body_inner {
+            width: 570px;
+            margin: 0 auto;
+            padding: 0;
+            background-color: #ffffff;
+            border-top: 6px solid #dc2626; /* Green accent color for success/confirmation */
+        }
+
+        .content-cell {
+            padding: 45px;
+        }
+
+        .details-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+
+        .details-row {
+            border-bottom: 1px solid #eaeaec;
+        }
+
+        .details-label {
+            padding: 12px 0;
+            color: #85878e;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            width: 40%;
+        }
+
+        .details-value {
+            padding: 12px 0;
+            color: #333333;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .email-body_inner {
+                width: 100% !important;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body, .email-body, .email-body_inner, .email-content, .email-wrapper {
+                background-color: #222222 !important;
+                color: #fff !important;
+            }
+            p, h1, h2, .details-value {
+                color: #fff !important;
+            }
+            .details-row {
+                border-bottom: 1px solid #444444 !important;
+            }
+        }
+
+        :root {
+            color-scheme: light dark;
+            supported-color-schemes: light dark;
+        }
+    </style>
+</head>
+
+<body>
+    <span class="preheader">Your booking at Patty Bro's is officially confirmed!</span>
+    <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+        <tr>
+            <td align="center">
+                <table class="email-content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                    <tr>
+                        <td class="email-body" width="570" cellpadding="0" cellspacing="0">
+                            <table class="email-body_inner" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
+                                <tr>
+                                    <td class="content-cell">
+                                        <div class="f-fallback">
+                                            
+                                            <div style="text-align: center; margin-bottom: 20px;">
+                                                <h2 style="color: #dc2626; margin: 0; font-size: 28px; letter-spacing: 1px;">PATTY BRO'S</h2>
+                                            </div>
+
+                                            <h1>Great News, <%= name %>!</h1>
+                                            <p><%= title || 'Your reservation has been confirmed.' %></p>
+                                            
+                                            
+
+                                            <h3 style="color: #333333; font-size: 16px; font-weight: bold; margin-bottom: 10px; border-bottom: 2px solid #dc2626; padding-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px;">Your Booking Breakdown</h3>
+                                            
+                                            <table class="details-table" role="presentation">
+                                                <tr class="details-row">
+                                                    <td class="details-label">Guest Name</td>
+                                                    <td class="details-value"><%= order.customerName %></td>
+                                                </tr>
+                                                <tr class="details-row">
+                                                    <td class="details-label">Party Size</td>
+                                                    <td class="details-value"><%= order.partySize %> Guests</td>
+                                                </tr>
+                                                <tr class="details-row">
+                                                    <td class="details-label">Date</td>
+                                                    <td class="details-value">
+                                                        <%= new Date(order.reservationDate).toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %>
+                                                    </td>
+                                                </tr>
+                                                <tr class="details-row">
+                                                    <td class="details-label">Preferred Time</td>
+                                                    <td class="details-value"><%= order.preferredTime %></td>
+                                                </tr>
+                                                <tr class="details-row">
+                                                    <td class="details-label">Contact Phone</td>
+                                                    <td class="details-value"><%= order.customerPhone %></td>
+                                                </tr>
+                                            </table>
+
+                                            <p style="margin-top: 25px;">If you have any last-minute changes or need to adjust your details, please reach out to us as early as possible so we can properly accommodate your request.</p>
+                                            
+                                            <p>We look forward to hosting you!<br />Patty Bro's</p>
+
+                                            <div style="margin-top: 30px; font-size: 13px; color: #000000; line-height: 1.6; text-align: left; border-top: 1px solid #eaeaec; padding-top: 20px;">
+                                                <strong>Patty Bro's</strong><br>
+                                                info@patty-bros.co.uk<br>
+                                               (+44) 07495258565<br>
+
+                                                Market Place Peckham, Unit 10<br>
+                                                The Aylesham Shopping Centre, Rye Ln<br>
+                                                Peckham, London SE15 5EW
+                                            </div>
+                                           
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

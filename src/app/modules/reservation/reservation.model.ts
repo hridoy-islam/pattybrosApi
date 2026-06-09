@@ -12,7 +12,7 @@ const ReservationSchema = new Schema(
     partySize: { type: Number, required: true },
     reservationDate: { type: Date, required: true },
     preferredTime: { type: String, required: true }, // Store as string like "19:00"
-    tableId: { type: Schema.Types.ObjectId, ref: "Table" },
+    // tableId: { type: Schema.Types.ObjectId, ref: "Table" },
     startTime: { type: String },// Store as string like "19:00"
     endTime: { type: String },// Store as string like "19:00"
     status: {

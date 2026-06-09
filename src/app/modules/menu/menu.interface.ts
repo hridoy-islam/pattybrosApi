@@ -15,4 +15,5 @@ export interface TMenu {
   addOnItems: TAddOnItem[];
   image: string;
   status: string;
+  cookingTime: string;
 }
