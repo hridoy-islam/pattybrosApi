@@ -65,7 +65,8 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:3000",
-      "https://mentoraedu.netlify.app",
+      "https://pattybros.vercel.app",
+      "https://patty-bros.co.uk"
     ],
     credentials: true,
   })
