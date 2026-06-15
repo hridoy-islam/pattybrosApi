@@ -145,7 +145,8 @@ const createOrderIntoDB = async (payload: TOrder) => {
     result = await result.populate("items.menuId");
 
     try {
-      const adminEmail = "mahitasnimul2@gmail.com";
+      // const adminEmail = "mahitasnimul2@gmail.com";
+      const adminEmail = "info@patty-bros.co.uk";
 
       // ─── WhatsApp Notification ───────────────────────────────────────────────
       const WHATSAPP_API_URL =
