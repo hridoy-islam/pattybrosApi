@@ -66,7 +66,8 @@ app.use(
       "http://localhost:5173",
       "http://localhost:3000",
       "https://pattybros.vercel.app",
-      "https://patty-bros.co.uk"
+      "https://patty-bros.co.uk",
+      "https://www.patty-bros.co.uk"
     ],
     credentials: true,
   })

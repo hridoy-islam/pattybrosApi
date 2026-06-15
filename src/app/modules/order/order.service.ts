@@ -63,17 +63,77 @@ export const generateNextOrderRefId = (
   return `${currentDatePrefix}${nextSequence}`;
 };
 
+// const createOrderIntoDB = async (payload: TOrder) => {
+//   try {
+//     // 1. Fetch the latest created order from the DB
+//     const lastOrder = await Order.findOne({}, { refId: 1 })
+//       .sort({ createdAt: -1 })
+//       .lean();
+
+//     // 2. Generate the next unique, incremental refId
+//     const nextRefId = generateNextOrderRefId(lastOrder?.refId);
+
+//     // 3. Inject it into the payload
+//     const orderData = {
+//       ...payload,
+//       refId: nextRefId,
+//     };
+
+//     let result = await Order.create(orderData);
+
+//     result = await result.populate("items.menuId");
+
+//     try {
+//       const adminEmail = "info@patty-bros.co.uk";
+
+//       await Promise.all([
+//         sendEmail(
+//           result.customerEmail,
+//           "customer_order_confirmation",
+//           `Thank you for your order!`,
+//           result.customerName,
+//           `Thank you for your order!`,
+//           result,
+//         ),
+
+//         // Send email to Admin with full order data
+//         sendEmailAdmin(
+//           adminEmail,
+//           "admin_order_notification",
+//           `New Order Received - #${result.refId}`,
+//           result.customerName,
+//           `A new order has been placed.`,
+//           result,
+//         ),
+//       ]);
+//     } catch (emailError) {
+//       console.error("Email layout dispatch failed:", emailError);
+//     }
+
+//     return result;
+//   } catch (error: any) {
+//     console.error("Error in createOrderIntoDB:", error);
+
+//     if (error instanceof AppError) {
+//       throw error;
+//     }
+
+//     throw new AppError(
+//       httpStatus.INTERNAL_SERVER_ERROR,
+//       error.message || "Failed to create Order",
+//     );
+//   }
+// };
+
+
 const createOrderIntoDB = async (payload: TOrder) => {
   try {
-    // 1. Fetch the latest created order from the DB
     const lastOrder = await Order.findOne({}, { refId: 1 })
       .sort({ createdAt: -1 })
       .lean();
 
-    // 2. Generate the next unique, incremental refId
     const nextRefId = generateNextOrderRefId(lastOrder?.refId);
 
-    // 3. Inject it into the payload
     const orderData = {
       ...payload,
       refId: nextRefId,
@@ -81,11 +141,114 @@ const createOrderIntoDB = async (payload: TOrder) => {
 
     let result = await Order.create(orderData);
 
+    // Populate the menuId so we can access menu titles and prices
     result = await result.populate("items.menuId");
 
     try {
-      const adminEmail = "info@patty-bros.co.uk";
+      const adminEmail = "mahitasnimul2@gmail.com";
 
+      // ─── WhatsApp Notification ───────────────────────────────────────────────
+      const WHATSAPP_API_URL =
+        "https://graph.facebook.com/v25.0/1200318036493213/messages";
+      const WHATSAPP_TOKEN = process.env.WHATSAPP_ACCESS_TOKEN;
+
+      let sendWhatsAppNotification: Promise<void> = Promise.resolve();
+
+      if (!WHATSAPP_TOKEN) {
+        console.error(
+          "WHATSAPP_ACCESS_TOKEN is not set — skipping WhatsApp notification"
+        );
+      } else {
+        // Build a compact order summary to use as template variables
+        // Meta templates have character limits per variable, so keep them concise
+        const orderRef = result.refId;
+        const customerName = result.customerName;
+        const customerPhone = result.customerPhone;
+        const pickupTime = result.pickUpTime;
+
+        // Build items summary string (keep under 1024 chars for the variable)
+       const itemsSummary = (result.items as any[])
+  .map((item: any, index: number) => {
+    const menu = item.menuId;
+    let line = `${index + 1}. ${menu.title} x${item.quantity}`;
+    if (item.addOnItems && item.addOnItems.length > 0) {
+      const addons = item.addOnItems
+        .map((a: any) => `${a.title} (£${a.price})`)
+        .join(", ");
+      line += ` [Add-ons: ${addons}]`;
+    }
+    if (item.instructions) {
+      line += ` [Note: ${item.instructions}]`;
+    }
+    return line;
+  })
+  .join(" | ");
+
+        const totalAmount = `${result.totalAmount}`;
+
+        /*
+         * OPTION A — Use your approved custom template (recommended)
+         *
+         * Replace "new_order_notification" with whatever template name
+         * you created and got approved in WhatsApp Manager.
+         *
+         * The template body should look like:
+         *
+         *   New Order - {{1}} 🍔
+         *   Customer: {{2}}
+         *   Phone: {{3}}
+         *   Pickup: {{4}}
+         *   Items:
+         *   {{5}}
+         *   Total: {{6}}
+         *
+         * Each {{N}} maps to the parameters array below in order.
+         */
+        const whatsappBody = {
+          messaging_product: "whatsapp",
+          to: "8801673784522", // no + sign, country code included
+          type: "template",
+          template: {
+            name: "new_order_notification", // ← replace with your approved template name
+            language: {
+              code: "en", // ← change to match your template language e.g. "en_GB"
+            },
+            components: [
+              {
+                type: "body",
+                parameters: [
+                  { type: "text", text: orderRef },           // {{1}} Order ref
+                  { type: "text", text: customerName },       // {{2}} Customer name
+                  { type: "text", text: customerPhone },      // {{3}} Phone
+                  { type: "text", text: pickupTime },         // {{4}} Pickup time
+                  { type: "text", text: itemsSummary },       // {{5}} Items
+                  { type: "text", text: totalAmount },        // {{6}} Total
+                ],
+              },
+            ],
+          },
+        };
+
+       
+        sendWhatsAppNotification = fetch(WHATSAPP_API_URL, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${WHATSAPP_TOKEN}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(whatsappBody),
+        }).then(async (res) => {
+          if (!res.ok) {
+            const errData = await res.json();
+            console.error("WhatsApp API Error:", JSON.stringify(errData, null, 2));
+          } else {
+            const successData = await res.json();
+            console.log("WhatsApp notification sent:", JSON.stringify(successData, null, 2));
+          }
+        });
+      }
+
+      // ─── Execute All Notifications in Parallel ───────────────────────────────
       await Promise.all([
         sendEmail(
           result.customerEmail,
@@ -93,21 +256,20 @@ const createOrderIntoDB = async (payload: TOrder) => {
           `Thank you for your order!`,
           result.customerName,
           `Thank you for your order!`,
-          result,
+          result
         ),
-
-        // Send email to Admin with full order data
         sendEmailAdmin(
           adminEmail,
           "admin_order_notification",
           `New Order Received - #${result.refId}`,
           result.customerName,
           `A new order has been placed.`,
-          result,
+          result
         ),
+        sendWhatsAppNotification,
       ]);
-    } catch (emailError) {
-      console.error("Email layout dispatch failed:", emailError);
+    } catch (notificationError) {
+      console.error("Notification dispatch failed:", notificationError);
     }
 
     return result;
@@ -120,10 +282,11 @@ const createOrderIntoDB = async (payload: TOrder) => {
 
     throw new AppError(
       httpStatus.INTERNAL_SERVER_ERROR,
-      error.message || "Failed to create Order",
+      error.message || "Failed to create Order"
     );
   }
 };
+
 
 const updateOrderIntoDB = async (id: string, payload: Partial<TOrder>) => {
   // 1. Fetch the existing order to verify existence and check its current status
